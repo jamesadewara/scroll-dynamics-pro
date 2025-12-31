@@ -1,0 +1,48 @@
+{
+  "name": "scroll-dynamics-pro",
+  "version": "1.0.0",
+  "description": "A lightweight, production-ready React scrolling library with no dependencies.",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c && tsc --emitDeclarationOnly",
+    "watch": "rollup -c -w",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "scrolling",
+    "horizontal-scroll",
+    "vertical-scroll",
+    "scroll",
+    "component"
+  ],
+  "author": "James Adewara <jamesadewara1@gmail.com> (https://github.com/jamesadewara)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jamesadewara/scroll-dynamics-pro"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "rollup": "^3.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "tslib": "^2.0.0",
+    "typescript": "^5.0.0"
+  }
+}

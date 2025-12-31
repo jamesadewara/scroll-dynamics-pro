@@ -1,0 +1,54 @@
+import React from 'react';
+import { ScrollSection, ScrollTransform } from 'scroll-dynamics-pro';
+
+export const VelocitySkewSection: React.FC = () => {
+    const images = [
+        'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80',
+        'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=400&q=80',
+        'https://images.unsplash.com/photo-1550684848-86a5d8727436?auto=format&fit=crop&w=400&q=80',
+        'https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?auto=format&fit=crop&w=400&q=80'
+    ];
+
+    return (
+        <ScrollSection style={{ background: '#f1f2f6', padding: '100px 5%' }}>
+            <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+                <h2 style={{ fontSize: '3rem', color: '#222' }}>Physics & Velocity</h2>
+                <p style={{ color: '#666' }}>Items warp based on scroll speed (GSAP-style).</p>
+            </div>
+
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                gap: '40px',
+                maxWidth: '1200px',
+                margin: '0 auto'
+            }}>
+                {images.map((src, i) => (
+                    // We render a ScrollTransform for EACH item to control it individually
+                    <ScrollTransform
+                        key={i}
+                        effect="skew-velocity"
+                        intensity={1}
+                    >
+                        <div style={{
+                            height: '400px',
+                            borderRadius: '12px',
+                            overflow: 'hidden',
+                            boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
+                        }}>
+                            <img
+                                src={src}
+                                alt="Demo"
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
+                                }}
+                            />
+                        </div>
+                    </ScrollTransform>
+                ))}
+            </div>
+        </ScrollSection>
+    );
+};

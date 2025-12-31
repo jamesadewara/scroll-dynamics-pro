@@ -1,0 +1,32 @@
+import React from "react";
+interface ScrollTransformProps {
+    children: React.ReactNode;
+    /**
+     * The effect to apply.
+     * 'parallax': Moves the element at a different speed than scroll.
+     * 'fade': Changes opacity from 0 to 1 based on entry.
+     * 'scale': Scales element from start scale to end scale.
+     * 'custom': Use the `transform` prop function.
+     */
+    effect?: "parallax" | "fade" | "scale" | "custom";
+    /**
+     * For parallax: speed factor.
+     * 0.5 = moves at half speed.
+     * -0.5 = moves in reverse.
+     */
+    speed?: number;
+    /**
+     * For fade/scale: input range [start, end] as generic progress 0..1 (viewport relative).
+     * default: [0, 1] meaning full viewport traversal.
+     */
+    range?: [number, number];
+    /**
+     * For custom effect: A function that receives progress (0..1) or scrollY and applies style.
+     * Warning: Keep this performant. direct DOM manipulation recommended.
+     */
+    transform?: (element: HTMLElement, progress: number, scrollY: number) => void;
+    className?: string;
+    style?: React.CSSProperties;
+}
+export declare const ScrollTransform: React.FC<ScrollTransformProps>;
+export {};
