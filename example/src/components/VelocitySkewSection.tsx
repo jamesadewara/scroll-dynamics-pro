@@ -10,16 +10,16 @@ export const VelocitySkewSection: React.FC = () => {
     ];
 
     return (
-        <ScrollSection style={{ background: '#f1f2f6', padding: '100px 5%' }}>
-            <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-                <h2 style={{ fontSize: '3rem', color: '#222' }}>Physics & Velocity</h2>
-                <p style={{ color: '#666' }}>Items warp based on scroll speed (GSAP-style).</p>
+        <ScrollSection style={{ background: '#f1f2f6', padding: 'clamp(60px, 10vh, 100px) clamp(20px, 5vw, 5%)' }}>
+            <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vh, 80px)' }}>
+                <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#222' }}>Physics & Velocity</h2>
+                <p style={{ color: '#666', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)' }}>Items warp based on scroll speed (GSAP-style).</p>
             </div>
 
             <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                gap: '40px',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(250px, 100%), 1fr))',
+                gap: 'clamp(30px, 5vw, 40px)',
                 maxWidth: '1200px',
                 margin: '0 auto'
             }}>
@@ -31,8 +31,8 @@ export const VelocitySkewSection: React.FC = () => {
                         intensity={1}
                     >
                         <div style={{
-                            height: '400px',
-                            borderRadius: '12px',
+                            height: 'clamp(300px, 60vw, 400px)',
+                            borderRadius: 'clamp(8px, 2vw, 12px)',
                             overflow: 'hidden',
                             boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
                         }}>

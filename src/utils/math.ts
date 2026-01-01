@@ -30,5 +30,25 @@ export const ScrollUtils = {
 
     abs: (value: number): number => Math.abs(value),
     min: (...values: number[]): number => Math.min(...values),
-    max: (...values: number[]): number => Math.max(...values)
+    max: (...values: number[]): number => Math.max(...values),
+
+    /**
+     * Rounds down to the nearest integer.
+     */
+    floor: (value: number): number => Math.floor(value),
+
+    /**
+     * Returns the cosine of an angle (in radians).
+     */
+    cos: (angle: number): number => Math.cos(angle),
+
+    /**
+     * Returns the sine of an angle (in radians).
+     */
+    sin: (angle: number): number => Math.sin(angle),
+
+    /**
+     * The mathematical constant PI (π).
+     */
+    PI: Math.PI
 };

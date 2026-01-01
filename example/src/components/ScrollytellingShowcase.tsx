@@ -4,10 +4,10 @@ import { ScrollTransform, Scrollytelling, ScrollUtils } from 'scroll-dynamics-pr
 export const ScrollytellingShowcase = () => {
     return (
         <React.Fragment>
-            <div style={{ padding: '100px 5%', background: '#000', color: 'white', textAlign: 'center' }}>
+            <div style={{ padding: 'clamp(60px, 10vh, 100px) clamp(20px, 5vw, 5%)', background: '#000', color: 'white', textAlign: 'center' }}>
                 <ScrollTransform effect="fade">
-                    <h2 style={{ fontSize: '3rem', marginBottom: '20px' }}>V2: Scrollytelling Engine</h2>
-                    <p style={{ color: '#888' }}>High-performance sticky rendering tied to precise progress (0 - 1).</p>
+                    <h2 style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', marginBottom: '20px' }}>V2: Scrollytelling Engine</h2>
+                    <p style={{ color: '#888', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)' }}>High-performance sticky rendering tied to precise progress (0 - 1).</p>
                 </ScrollTransform>
             </div>
 
@@ -19,16 +19,10 @@ export const ScrollytellingShowcase = () => {
                     // Layer 3: 0.7 - 0.9
 
                     const getOpacity = (start: number, end: number) => {
-                        // Fade in/out around the center of the range?
-                        // Or simple: visible if inside range?
-                        // Let's do swift fade.
                         if (progress < start || progress > end) return 0;
-                        // Fade edges
                         const rangeDuration = end - start;
                         const center = start + rangeDuration / 2;
                         const dist = ScrollUtils.abs(progress - center);
-                        // if dist is 0 (center), opacity 1. 
-                        // if dist is rangeDuration/2 (edge), opacity 0.
                         return ScrollUtils.max(0, 1 - (dist / (rangeDuration / 2)) * 1.5);
                     };
 
@@ -76,7 +70,7 @@ export const ScrollytellingShowcase = () => {
                             {/* Text Layers */}
                             <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', maxWidth: '800px' }}>
                                 <h3 style={{
-                                    fontSize: '4rem',
+                                    fontSize: 'clamp(2rem, 6vw, 4rem)',
                                     position: 'absolute',
                                     width: '100%',
                                     top: '50%',
@@ -90,7 +84,7 @@ export const ScrollytellingShowcase = () => {
                                 </h3>
 
                                 <h3 style={{
-                                    fontSize: '4rem',
+                                    fontSize: 'clamp(2rem, 6vw, 4rem)',
                                     position: 'absolute',
                                     width: '100%',
                                     top: '50%',
@@ -104,7 +98,7 @@ export const ScrollytellingShowcase = () => {
                                 </h3>
 
                                 <h3 style={{
-                                    fontSize: '4rem',
+                                    fontSize: 'clamp(2rem, 6vw, 4rem)',
                                     position: 'absolute',
                                     width: '100%',
                                     top: '50%',

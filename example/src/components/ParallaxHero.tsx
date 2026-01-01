@@ -25,15 +25,15 @@ export const ParallaxHero: React.FC = () => {
             </ScrollTransform>
 
             {/* Foreground Content (Moves Fast / Scrolls Normal) */}
-            <div style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
+            <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 20px' }}>
                 <ScrollTransform effect="scale" range={[0, 0.2]}>
-                    <h1 style={{ fontSize: '5rem', marginBottom: '0', textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+                    <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 5rem)', marginBottom: '0', textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
                         Scroll<span style={{ color: '#e056fd' }}>Dynamics</span>
                     </h1>
                 </ScrollTransform>
 
                 <ScrollTransform effect="fade">
-                    <p style={{ fontSize: '1.2rem', color: '#ccc', marginTop: '20px' }}>
+                    <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', color: '#ccc', marginTop: '20px' }}>
                         Production-ready smooth scrolling for React
                     </p>
                 </ScrollTransform>

@@ -26,7 +26,7 @@ export const Nav: React.FC = () => {
                 top: 0,
                 left: 0,
                 width: '100%',
-                padding: '20px 40px',
+                padding: 'clamp(15px, 3vw, 20px) clamp(20px, 4vw, 40px)',
                 zIndex: 1000,
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -37,15 +37,15 @@ export const Nav: React.FC = () => {
             }}
         >
             <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
-                <div style={{ fontWeight: 800, fontSize: '1.5rem', letterSpacing: '-0.05em' }}>
+                <div style={{ fontWeight: 800, fontSize: 'clamp(1.2rem, 3vw, 1.5rem)', letterSpacing: '-0.05em' }}>
                     Scroll<span style={{ color: '#e056fd' }}>Dynamics</span>
                 </div>
             </Link>
 
-            <div style={{ display: 'flex', gap: '30px', fontSize: '0.9rem', fontWeight: 500 }}>
+            <div style={{ display: 'flex', gap: 'clamp(15px, 3vw, 30px)', fontSize: 'clamp(0.85rem, 2vw, 0.9rem)', fontWeight: 500 }}>
                 <Link to="/" style={{ color: location.pathname === '/' ? '#e056fd' : 'white', textDecoration: 'none' }}>Showcase</Link>
                 <Link to="/docs" style={{ color: location.pathname === '/docs' ? '#e056fd' : 'white', textDecoration: 'none' }}>Documentation</Link>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={{ color: 'white', textDecoration: 'none' }}>GitHub</a>
+                <a href="https://github.com/jamesadewara/scroll-dynamics-pro" target="_blank" rel="noopener noreferrer" style={{ color: 'white', textDecoration: 'none' }}>GitHub</a>
             </div>
         </nav>
     );

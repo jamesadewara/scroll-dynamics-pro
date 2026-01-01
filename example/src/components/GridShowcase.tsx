@@ -6,18 +6,18 @@ export const GridShowcase: React.FC = () => {
     const items = Array.from({ length: 8 }, (_, i) => i + 1);
 
     return (
-        <ScrollSection style={{ background: '#222f3e', color: '#fff', padding: '100px 5%' }}>
+        <ScrollSection style={{ background: '#222f3e', color: '#fff', padding: 'clamp(60px, 10vh, 100px) clamp(20px, 5vw, 5%)' }}>
 
-            <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+            <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vh, 80px)' }}>
                 <ScrollTransform effect="fade">
-                    <h2 style={{ fontSize: '3rem' }}>Staggered Grids</h2>
+                    <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>Staggered Grids</h2>
                 </ScrollTransform>
             </div>
 
             <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-                gap: '20px',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(min(200px, 100%), 1fr))',
+                gap: 'clamp(15px, 3vw, 20px)',
                 maxWidth: '1000px',
                 margin: '0 auto'
             }}>
@@ -26,39 +26,22 @@ export const GridShowcase: React.FC = () => {
                         key={index}
                         effect="custom"
                         transform={(el: HTMLElement, p: number) => {
-                            // STAGGERED ENTRANCE
-                            // We can simulate stagger by using the index.
-                            // Usually this is done by Delay.
-                            // We can do manual "staggered threshold" logic:
-                            // We want the element to start moving LATER based on index?
-                            // Or simpler: Just set transition-delay via style!
-
-                            // Reveal logic: Slide up and fade in
-                            // p: 0 (bottom of viewport) -> 1 (top of viewport)
-                            // entry is usually around 0 to 0.3 depending on element height.
-
-                            // Let's use standard sliding but with css transition-delay applied ONCE.
-                            // But ScrollTransform drives the style every frame. 
-                            // Better: Use `transform` to offset P based on index?
-                            // e.g. effectiveP = p - (index * 0.02)
-
+                            // Simplified stagger logic
                             const stagger = index * 0.05;
-                            const effectiveP = ScrollUtils.max(0, (p * 2) - stagger); // accelerate * 2
-                            const clamped = ScrollUtils.min(1, effectiveP);
-
-                            const y = (1 - clamped) * 100;
-                            el.style.opacity = clamped.toString();
+                            const effectiveP = ScrollUtils.clamp((p * 2) - stagger, 0, 1);
+                            const y = (1 - effectiveP) * 100;
+                            el.style.opacity = effectiveP.toString();
                             el.style.transform = `translateY(${y}px)`;
                         }}
                     >
                         <div style={{
-                            height: '200px',
+                            height: 'clamp(150px, 30vw, 200px)',
                             background: `hsl(${200 + index * 10}, 70%, 50%)`,
-                            borderRadius: '8px',
+                            borderRadius: 'clamp(6px, 2vw, 8px)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            fontSize: '2rem',
+                            fontSize: 'clamp(1.5rem, 4vw, 2rem)',
                             fontWeight: 'bold'
                         }}>
                             {num}

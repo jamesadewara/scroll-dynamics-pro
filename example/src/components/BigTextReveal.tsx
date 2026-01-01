@@ -9,11 +9,11 @@ export const BigTextReveal: React.FC = () => {
     const words = ["SMOOTH", "FAST", "NATIVE"];
 
     return (
-        <ScrollSection style={{ background: '#000', color: '#fff', padding: '100px 0', minHeight: '150vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <ScrollSection style={{ background: '#000', color: '#fff', padding: 'clamp(60px, 10vh, 100px) clamp(20px, 5vw, 5%)', minHeight: '150vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
 
             {/* Intro Label */}
             <ScrollTransform effect="fade">
-                <div style={{ textTransform: 'uppercase', letterSpacing: '0.2rem', marginBottom: '40px', color: '#e056fd' }}>
+                <div style={{ textTransform: 'uppercase', letterSpacing: 'clamp(0.1rem, 0.5vw, 0.2rem)', marginBottom: 'clamp(30px, 5vh, 40px)', color: '#e056fd', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>
                     Experience the difference
                 </div>
             </ScrollTransform>
@@ -42,7 +42,7 @@ export const BigTextReveal: React.FC = () => {
             </div>
 
             <ScrollTransform effect="scale" range={[0, 1]}>
-                <div style={{ marginTop: '50px', width: '50px', height: '50px', borderRadius: '50%', border: '2px solid white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ marginTop: 'clamp(30px, 5vh, 50px)', width: 'clamp(40px, 8vw, 50px)', height: 'clamp(40px, 8vw, 50px)', borderRadius: '50%', border: '2px solid white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 'clamp(1.2rem, 3vw, 1.5rem)' }}>
                     ↓
                 </div>
             </ScrollTransform>

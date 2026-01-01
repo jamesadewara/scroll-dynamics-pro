@@ -12,12 +12,12 @@ export const PinnedContent: React.FC = () => {
 
     return (
         <ScrollSection style={{ background: '#111', color: 'white' }}>
-            <div style={{ display: 'flex', maxWidth: '1200px', margin: '0 auto', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', maxWidth: '1200px', margin: '0 auto', flexWrap: 'wrap', gap: 'clamp(20px, 4vw, 0)' }}>
 
                 {/* Sticky Left Column */}
                 <div style={{
-                    flex: '1 1 300px',
-                    padding: '80px 40px',
+                    flex: '1 1 min(300px, 100%)',
+                    padding: 'clamp(40px, 8vh, 80px) clamp(20px, 4vw, 40px)',
                     position: 'sticky',
                     top: 0,
                     height: '100vh',
@@ -26,29 +26,29 @@ export const PinnedContent: React.FC = () => {
                     justifyContent: 'center'
                 }}>
                     <ScrollTransform effect="fade">
-                        <h2 style={{ fontSize: '3rem', marginBottom: '20px' }}>Pinned Content</h2>
+                        <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '20px' }}>Pinned Content</h2>
                     </ScrollTransform>
-                    <p style={{ fontSize: '1.2rem', lineHeight: 1.6, color: '#aaa' }}>
+                    <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', lineHeight: 1.6, color: '#aaa' }}>
                         This text stays pinned to the left while the visuals on the right scroll by.
                         <br /><br />
                         Commonly used for feature showcases or storytelling.
-                        Achieved easily with native <code>position: sticky</code> within a standard container.
+                        Achieved easily with native <code style={{ fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>position: sticky</code> within a standard container.
                     </p>
                 </div>
 
                 {/* Scrolling Right Column */}
-                <div style={{ flex: '1 1 400px', padding: '80px 40px' }}>
+                <div style={{ flex: '1 1 min(400px, 100%)', padding: 'clamp(40px, 8vh, 80px) clamp(20px, 4vw, 40px)' }}>
                     {images.map((bg, i) => (
                         <ScrollTransform key={i} effect="scale" range={[0, 0.3]}>
                             <div style={{
-                                height: '500px',
+                                height: 'clamp(300px, 60vw, 500px)',
                                 background: bg,
-                                marginBottom: '60px',
-                                borderRadius: '16px',
+                                marginBottom: 'clamp(40px, 8vw, 60px)',
+                                borderRadius: 'clamp(12px, 3vw, 16px)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                fontSize: '4rem',
+                                fontSize: 'clamp(2.5rem, 8vw, 4rem)',
                                 color: 'rgba(255,255,255,0.5)',
                                 fontWeight: 'bold'
                             }}>

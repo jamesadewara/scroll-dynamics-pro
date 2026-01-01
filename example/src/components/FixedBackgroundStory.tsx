@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollSection, ScrollTransform, ScrollUtils } from 'scroll-dynamics-pro';
+import { ScrollSection, ScrollTransform } from 'scroll-dynamics-pro';
 
 export const FixedBackgroundStory: React.FC = () => {
     return (
@@ -47,33 +47,28 @@ export const FixedBackgroundStory: React.FC = () => {
             }}>
 
                 {/* Story Part 1: Enters immediately */}
-                <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 clamp(20px, 5vw, 40px)' }}>
                     <ScrollTransform effect="fade">
-                        <h2 style={{ fontSize: '4rem', color: 'white', textShadow: '0 4px 20px black' }}>The Beginning</h2>
+                        <h2 style={{ fontSize: 'clamp(2.5rem, 7vw, 4rem)', color: 'white', textShadow: '0 4px 20px black' }}>The Beginning</h2>
                     </ScrollTransform>
                 </div>
 
                 {/* Story Part 2 */}
-                <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', paddingLeft: '10%' }}>
+                <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', padding: '0 clamp(20px, 5vw, 10%)' }}>
                     <ScrollTransform effect="slide-in" direction="right" intensity={0.5}>
-                        <div style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', padding: '40px', borderRadius: '8px', maxWidth: '400px', color: '#fff' }}>
-                            <h3>Part II: The Slide</h3>
-                            <p>As you scroll deeper, the background stays rooted, anchoring the experience.</p>
+                        <div style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', padding: 'clamp(30px, 5vw, 40px)', borderRadius: 'clamp(6px, 2vw, 8px)', maxWidth: 'min(400px, 90vw)', color: '#fff' }}>
+                            <h3 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)' }}>Part II: The Slide</h3>
+                            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.1rem)' }}>As you scroll deeper, the background stays rooted, anchoring the experience.</p>
                         </div>
                     </ScrollTransform>
                 </div>
 
                 {/* Story Part 3 */}
-                <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '10%' }}>
-                    <ScrollTransform effect="custom" transform={(el: HTMLElement, p: number) => {
-                        // Slide in from right and rotate
-                        const translate = ScrollUtils.lerp(100, 0, p);
-                        el.style.transform = `translateX(${translate}px) rotate(${translate * 0.1}deg)`;
-                        el.style.opacity = p.toString();
-                    }}>
-                        <div style={{ background: 'rgba(255,107,129,0.2)', backdropFilter: 'blur(10px)', padding: '40px', borderRadius: '8px', maxWidth: '400px', color: '#fff' }}>
-                            <h3>Part III: The Twist</h3>
-                            <p>Elements can enter from any direction, creating a dynamic narrative flow.</p>
+                <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', padding: '0 clamp(20px, 5vw, 10%)' }}>
+                    <ScrollTransform effect="slide-in" direction="left" intensity={0.5}>
+                        <div style={{ background: 'rgba(255,107,129,0.2)', backdropFilter: 'blur(10px)', padding: 'clamp(30px, 5vw, 40px)', borderRadius: 'clamp(6px, 2vw, 8px)', maxWidth: 'min(400px, 90vw)', color: '#fff' }}>
+                            <h3 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)' }}>Part III: The Twist</h3>
+                            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.1rem)' }}>Elements can enter from any direction, creating a dynamic narrative flow.</p>
                         </div>
                     </ScrollTransform>
                 </div>
