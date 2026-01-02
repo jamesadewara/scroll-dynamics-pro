@@ -29,7 +29,6 @@ export default {
     commonjs(),
     typescript({
       tsconfig: "./tsconfig.json",
-      compilerOptions: { declaration: true, declarationDir: "dist" },
     }),
     terser(),
   ],
