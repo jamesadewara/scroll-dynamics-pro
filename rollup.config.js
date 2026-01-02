@@ -12,16 +12,16 @@ export default {
   input: "src/index.ts",
   output: [
     {
-      file: "dist/index.js",
+      file: packageJson.main,
       format: "cjs",
       sourcemap: true,
-      banner: "'use client';",
+      // banner: "'use client';",
     },
     {
-      file: "dist/index.esm.js",
+      file: packageJson.module,
       format: "esm",
       sourcemap: true,
-      banner: "'use client';",
+      // banner: "'use client';",
     },
   ],
   plugins: [
@@ -30,6 +30,8 @@ export default {
     commonjs(),
     typescript({
       tsconfig: "./tsconfig.json",
+      declaration: true,
+      declarationDir: 'dist',
     }),
     babel({
       babelHelpers: "bundled",
