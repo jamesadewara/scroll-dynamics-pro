@@ -65,7 +65,7 @@ export const DocumentationPage: React.FC = () => {
         <div className="docs-container">
             {/* Sidebar Navigation */}
             <aside className="docs-sidebar">
-                <div style={{ marginBottom: '2rem' }}>
+                <div style={{ marginBottom: '2rem', marginTop: '4rem' }}>
                     <h3 style={{ margin: 0, color: '#fff' }}>Scroll Dynamics</h3>
                     <div style={{ fontSize: '0.8rem', color: '#888' }}>v1.0.0</div>
                 </div>
