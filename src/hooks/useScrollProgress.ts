@@ -1,4 +1,4 @@
-import { useState, useEffect, RefObject } from 'react';
+import { useState, useEffect, type RefObject } from 'react';
 import { useScroll } from '../context/ScrollContext';
 import { ScrollUtils } from '../utils/math';
 

@@ -355,7 +355,7 @@ export const HorizontalDemo = () => (
                             <div style={{ padding: '0 50px' }}>
                                 <ScrollTransform
                                     effect="custom"
-                                    transform={(el, progress, scrollY) => {
+                                    transform={(el, scrollY) => {
                                         const x = Math.sin(scrollY * 0.02) * 50;
                                         el.style.transform = `translateX(${x}px)`;
                                     }}
