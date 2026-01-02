@@ -1,0 +1,27 @@
+# Source
+src
+example
+rollup.config.js
+tsconfig.json
+
+# Git
+.git
+.gitignore
+
+# Env/Config
+.env
+.DS_Store
+
+# Brain/Artifacts
+.gemini
+
+example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Node Modules
+node_modules

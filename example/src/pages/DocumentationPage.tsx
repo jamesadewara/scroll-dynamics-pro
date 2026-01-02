@@ -1,5 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './DocumentationPage.css';
+import { CodeBlock } from '../components/CodeBlock';
+import { PreviewBlock } from '../components/PreviewBlock';
+import { EXAMPLES } from '../components/DocExamples';
+import { ScrollSection, ScrollTransform } from 'scroll-dynamics-pro';
+import { ParallaxHero } from '../components/ParallaxHero';
+import { VelocitySkewSection } from '../components/VelocitySkewSection';
+import { HorizontalGallery } from '../components/HorizontalGallery';
+import { FixedBackgroundStory } from '../components/FixedBackgroundStory';
+import { AdvancedTransforms } from '../components/AdvancedTransforms';
+import { BigTextReveal } from '../components/BigTextReveal';
+import { ColorShiftSection } from '../components/ColorShiftSection';
+import { CosmicJourney } from '../components/CosmicJourney';
+import { GridShowcase } from '../components/GridShowcase';
+import { PinnedContent } from '../components/PinnedContent';
+import { ScrollytellingShowcase } from '../components/ScrollytellingShowcase';
+
 
 const SECTIONS = [
     { id: 'introduction', label: 'Introduction' },
@@ -8,6 +24,8 @@ const SECTIONS = [
     { id: 'scroll-provider', label: 'ScrollProvider' },
     { id: 'scroll-section', label: 'ScrollSection' },
     { id: 'scroll-transform', label: 'ScrollTransform' },
+    { id: 'math-effects', label: 'Math Effects' },
+    { id: 'showcase', label: 'Component Showcase' },
     { id: 'use-scroll', label: 'useScroll Hook' },
     { id: 'performance', label: 'Performance Tips' },
 ];
@@ -15,11 +33,11 @@ const SECTIONS = [
 export const DocumentationPage: React.FC = () => {
     const [activeSection, setActiveSection] = useState('introduction');
 
-    // Simple scroll spy logic
+    // Scroll Spy Logic
     useEffect(() => {
         const handleScroll = () => {
             const sections = SECTIONS.map(s => document.getElementById(s.id));
-            const scrollPos = window.scrollY + 100; // Offset
+            const scrollPos = window.scrollY + 120;
 
             for (const section of sections) {
                 if (section && section.offsetTop <= scrollPos && (section.offsetTop + section.offsetHeight) > scrollPos) {
@@ -36,7 +54,7 @@ export const DocumentationPage: React.FC = () => {
         const element = document.getElementById(id);
         if (element) {
             window.scrollTo({
-                top: element.offsetTop - 80,
+                top: element.offsetTop - 100,
                 behavior: 'smooth'
             });
             setActiveSection(id);
@@ -45,305 +63,348 @@ export const DocumentationPage: React.FC = () => {
 
     return (
         <div className="docs-container">
-            {/* Sidebar */}
+            {/* Sidebar Navigation */}
             <aside className="docs-sidebar">
-                <a href="#/" className="docs-brand">Scroll Dynamics Pro</a>
+                <div style={{ marginBottom: '2rem' }}>
+                    <h3 style={{ margin: 0, color: '#fff' }}>Scroll Dynamics</h3>
+                    <div style={{ fontSize: '0.8rem', color: '#888' }}>v1.0.0</div>
+                </div>
 
                 <div className="docs-nav-group">
                     <div className="docs-nav-label">Getting Started</div>
                     {SECTIONS.slice(0, 3).map(item => (
-                        <a
-                            key={item.id}
-                            href={`#${item.id}`}
-                            className={`docs-nav-item ${activeSection === item.id ? 'active' : ''}`}
-                            onClick={(e) => { e.preventDefault(); scrollTo(item.id); }}
-                        >
+                        <a key={item.id} href={`#${item.id}`} className={`docs-nav-item ${activeSection === item.id ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); scrollTo(item.id); }}>
                             {item.label}
                         </a>
                     ))}
                 </div>
 
                 <div className="docs-nav-group">
-                    <div className="docs-nav-label">API Reference</div>
-                    {SECTIONS.slice(3, 7).map(item => (
-                        <a
-                            key={item.id}
-                            href={`#${item.id}`}
-                            className={`docs-nav-item ${activeSection === item.id ? 'active' : ''}`}
-                            onClick={(e) => { e.preventDefault(); scrollTo(item.id); }}
-                        >
+                    <div className="docs-nav-label">Core Components</div>
+                    {SECTIONS.slice(3, 6).map(item => (
+                        <a key={item.id} href={`#${item.id}`} className={`docs-nav-item ${activeSection === item.id ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); scrollTo(item.id); }}>
                             {item.label}
                         </a>
                     ))}
                 </div>
 
                 <div className="docs-nav-group">
-                    <div className="docs-nav-label">Advanced</div>
-                    {SECTIONS.slice(7).map(item => (
-                        <a
-                            key={item.id}
-                            href={`#${item.id}`}
-                            className={`docs-nav-item ${activeSection === item.id ? 'active' : ''}`}
-                            onClick={(e) => { e.preventDefault(); scrollTo(item.id); }}
-                        >
+                    <div className="docs-nav-label">Hooks & Advanced</div>
+                    {SECTIONS.slice(6).map(item => (
+                        <a key={item.id} href={`#${item.id}`} className={`docs-nav-item ${activeSection === item.id ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); scrollTo(item.id); }}>
                             {item.label}
                         </a>
                     ))}
                 </div>
             </aside>
 
-            {/* Content */}
+            {/* Main Content Area */}
             <main className="docs-content">
 
+                {/* Introduction */}
                 <section id="introduction" className="docs-section">
                     <h1 className="docs-title">Documentation</h1>
-                    <p className="docs-description">
-                        Scroll Dynamics Pro is a lightweight, zero-dependency React library for creating high-performance scroll interactions.
-                        It uses a centralized scroll loop to minimize layout thrashing and maximize frame rates.
+                    <p className="docs-lead">
+                        Build high-performance scroll interactions in React. Lightweight, dependency-free, and buttery smooth.
                     </p>
-                    <div className="docs-alert docs-alert-info">
-                        <strong>Note:</strong> This library is optimized for modern browsers and uses <code>requestAnimationFrame</code> for updates.
+                    <div className="doc-badges" style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+                        <span style={{ background: '#2dba4e', color: 'white', padding: '4px 8px', borderRadius: '4px', fontSize: '12px' }}>v1.0.0</span>
+                        <span style={{ background: '#333', color: 'white', padding: '4px 8px', borderRadius: '4px', fontSize: '12px' }}>TypeScript</span>
+                        <span style={{ background: '#333', color: 'white', padding: '4px 8px', borderRadius: '4px', fontSize: '12px' }}>MIT</span>
                     </div>
                 </section>
 
+                <hr className="docs-divider" />
+
+                {/* Installation */}
                 <section id="installation" className="docs-section">
-                    <h2 className="docs-h2">Installation</h2>
-                    <p className="docs-p">Install the package via npm or yarn:</p>
-                    <div className="docs-pre">
-                        <code className="docs-code">npm install scroll-dynamics-pro</code>
-                    </div>
-                    <p className="docs-p">Or using yarn:</p>
-                    <div className="docs-pre">
-                        <code className="docs-code">yarn add scroll-dynamics-pro</code>
-                    </div>
+                    <h2>Installation</h2>
+                    <p>Install the package using your preferred package manager.</p>
+                    <CodeBlock code="npm install scroll-dynamics-pro" language="bash" title="Terminal" />
+                    <CodeBlock code="yarn add scroll-dynamics-pro" language="bash" title="Terminal" />
                 </section>
 
+                <hr className="docs-divider" />
+
+                {/* Quick Start */}
                 <section id="quick-start" className="docs-section">
-                    <h2 className="docs-h2">Quick Start</h2>
-                    <p className="docs-p">
-                        To get started, wrap your application (or the scrolling container) with the <code className="docs-code-inline">ScrollProvider</code>.
-                        This context manages the single scroll event listener for your entire app.
-                    </p>
-                    <div className="docs-pre">
-                        <code className="docs-code">
-                            {`import React from 'react';
-import { ScrollProvider, ScrollSection, ScrollTransform } from 'scroll-dynamics-pro';
-
-function App() {
-  return (
-    <ScrollProvider>
-      <ScrollSection>
-        <h1>Welcome to Scroll Dynamics</h1>
-      </ScrollSection>
-      
-      <ScrollTransform effect="parallax" speed={0.2}>
-        <img src="hero.jpg" alt="Hero" />
-      </ScrollTransform>
-    </ScrollProvider>
-  );
-}`}
-                        </code>
-                    </div>
+                    <h2>Quick Start</h2>
+                    <p>Wrap your application with the <code>ScrollProvider</code> and start animating.</p>
+                    <CodeBlock code={EXAMPLES.scrollProviderHelper} language="tsx" title="App.tsx" />
                 </section>
 
-                <hr style={{ borderColor: '#30363d', opacity: 0.5, margin: '4rem 0' }} />
+                <hr className="docs-divider" />
 
+                {/* ScrollProvider */}
                 <section id="scroll-provider" className="docs-section">
-                    <h2 className="docs-h2">ScrollProvider</h2>
-                    <p className="docs-p">
-                        The root component that establishes the scroll context. It attaches the global scroll listener and broadcasts updates to all subscribers efficiently.
-                    </p>
+                    <h2>ScrollProvider</h2>
+                    <p>The context provider that manages the single scroll event listener.</p>
 
-                    <h3 className="docs-h3">Props</h3>
-                    <div className="docs-table-wrapper">
-                        <table className="docs-table">
-                            <thead>
-                                <tr>
-                                    <th>Prop</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td className="prop-name">children</td>
-                                    <td className="prop-type">React.ReactNode</td>
-                                    <td className="prop-default">-</td>
-                                    <td>The content of your application.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <h3>Usage</h3>
+                    <CodeBlock code={EXAMPLES.scrollProviderContext} language="tsx" title="Context Usage" />
                 </section>
 
+                <hr className="docs-divider" />
+
+                {/* ScrollSection */}
                 <section id="scroll-section" className="docs-section">
-                    <h2 className="docs-h2">ScrollSection</h2>
-                    <p className="docs-p">
-                        A semantic container for dividing your page content. It can handle horizontal scrolling areas as well.
-                    </p>
+                    <h2>ScrollSection</h2>
+                    <p>Defines logical sections of your page. Supports both vertical and horizontal layouts.</p>
 
-                    <h3 className="docs-h3">Props</h3>
-                    <div className="docs-table-wrapper">
-                        <table className="docs-table">
-                            <thead>
-                                <tr>
-                                    <th>Prop</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td className="prop-name">direction</td>
-                                    <td className="prop-type">'vertical' | 'horizontal'</td>
-                                    <td className="prop-default">'vertical'</td>
-                                    <td>Defines the flow of content within the section.</td>
-                                </tr>
-                                <tr>
-                                    <td className="prop-name">className</td>
-                                    <td className="prop-type">string</td>
-                                    <td className="prop-default">-</td>
-                                    <td>Additional CSS classes.</td>
-                                </tr>
-                                <tr>
-                                    <td className="prop-name">style</td>
-                                    <td className="prop-type">React.CSSProperties</td>
-                                    <td className="prop-default">-</td>
-                                    <td>Inline styles.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <h3>Basic Usage</h3>
+                    <CodeBlock code={EXAMPLES.sectionBasic} language="tsx" title="Section" />
+
+                    <h3>Horizontal Scrolling</h3>
+                    <PreviewBlock code={EXAMPLES.sectionHorizontal} title="Horizontal Layout">
+                        <div style={{ position: 'relative', height: '400px', width: '100%' }}>
+                            <HorizontalGallery />
+                        </div>
+                    </PreviewBlock>
+
+                    <h3>Sticky Content</h3>
+                    <PreviewBlock code={EXAMPLES.sectionSticky} title="Sticky Positioning">
+                        <FixedBackgroundStory />
+                    </PreviewBlock>
+
+                    <h3>Grid Layout</h3>
+                    <PreviewBlock code={EXAMPLES.sectionGrid} title="Grid Layout">
+                        <ScrollSection>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+                                <div style={{ background: '#2d3436', padding: 20, borderRadius: 8 }}>Grid Item 1</div>
+                                <div style={{ background: '#2d3436', padding: 20, borderRadius: 8 }}>Grid Item 2</div>
+                            </div>
+                        </ScrollSection>
+                    </PreviewBlock>
+
+                    <h3>Nested Section</h3>
+                    <CodeBlock code={EXAMPLES.sectionNested} language="tsx" title="Nested Sections" />
                 </section>
 
+                <hr className="docs-divider" />
+
+                {/* ScrollTransform */}
                 <section id="scroll-transform" className="docs-section">
-                    <h2 className="docs-h2">ScrollTransform</h2>
-                    <p className="docs-p">
-                        The powerhouse component for creating scroll-triggered animations. It supports built-in presets (parallax, fade, scale) and a fully custom render prop.
-                    </p>
+                    <h2>ScrollTransform</h2>
+                    <p>The core component for animations. Use presets or fully custom logic.</p>
 
-                    <h3 className="docs-h3">Props</h3>
-                    <div className="docs-table-wrapper">
-                        <table className="docs-table">
-                            <thead>
-                                <tr>
-                                    <th>Prop</th>
-                                    <th>Type</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td className="prop-name">effect</td>
-                                    <td className="prop-type">'parallax' | 'fade' | 'scale' | 'skew-velocity' | 'rotate' | 'rotate-x' | 'rotate-y' | 'slide-in' | 'custom'</td>
-                                    <td className="prop-default">'parallax'</td>
-                                    <td>The type of animation to apply.</td>
-                                </tr>
-                                <tr>
-                                    <td className="prop-name">speed</td>
-                                    <td className="prop-type">number</td>
-                                    <td className="prop-default">0.2</td>
-                                    <td>Speed factor for parallax effects. Negative values reverse direction.</td>
-                                </tr>
-                                <tr>
-                                    <td className="prop-name">intensity</td>
-                                    <td className="prop-type">number</td>
-                                    <td className="prop-default">1</td>
-                                    <td>Multiplier for effect strength (e.g. max skew angle, rotation degrees, slide distance).</td>
-                                </tr>
-                                <tr>
-                                    <td className="prop-name">direction</td>
-                                    <td className="prop-type">'up' | 'down' | 'left' | 'right'</td>
-                                    <td className="prop-default">'up'</td>
-                                    <td>Direction for 'slide-in' effect.</td>
-                                </tr>
-                                <tr>
-                                    <td className="prop-name">transform</td>
-                                    <td className="prop-type">Function</td>
-                                    <td className="prop-default">-</td>
-                                    <td>
-                                        Callback for 'custom' effect.<br />
-                                        <code className="docs-code-inline">(el, progress, scrollY, velocity) ={'>'} void</code>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="prop-name">onEnter</td>
-                                    <td className="prop-type">Function</td>
-                                    <td className="prop-default">-</td>
-                                    <td>Callback fired when element enters viewport.</td>
-                                </tr>
-                                <tr>
-                                    <td className="prop-name">onLeave</td>
-                                    <td className="prop-type">Function</td>
-                                    <td className="prop-default">-</td>
-                                    <td>Callback fired when element leaves viewport.</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div className="example-grid">
+                        <div>
+                            <h3>Parallax</h3>
+                            <PreviewBlock code={EXAMPLES.transformParallax} title="Parallax Effect" sticky>
+                                <ScrollTransform effect="parallax" speed={0.2}>
+                                    <div style={{ width: 150, height: 150, background: 'linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)', borderRadius: 20, boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}></div>
+                                </ScrollTransform>
+                            </PreviewBlock>
+                        </div>
+                        <div>
+                            <h3>Rotate</h3>
+                            <PreviewBlock code={EXAMPLES.transformRotate} title="Rotation Effect" sticky>
+                                <ScrollTransform effect="rotate" intensity={1}>
+                                    <div style={{ width: 150, height: 150, background: 'linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)', borderRadius: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem' }}>
+                                        🔄
+                                    </div>
+                                </ScrollTransform>
+                            </PreviewBlock>
+                        </div>
                     </div>
 
-                    <h3 className="docs-h3">Example: Custom Velocity Skew</h3>
-                    <div className="docs-pre">
-                        <code className="docs-code">
-                            {`<ScrollTransform 
-  effect="custom" 
-  transform={(el, p, scrollY, velocity) => {
-    // Skew based on scroll velocity (pixels/frame)
-    el.style.transform = \`skewY(\${velocity * 0.1}deg)\`;
-  }}
->
-  <div className="card">Velocity Card</div>
-</ScrollTransform>`}
-                        </code>
+                    <div className="example-grid">
+                        <div>
+                            <h3>Skew</h3>
+                            <PreviewBlock code={EXAMPLES.transformSkew} title="Skew Velocity">
+                                <VelocitySkewSection />
+                            </PreviewBlock>
+                        </div>
+                        <div>
+                            <h3>Scale</h3>
+                            <PreviewBlock code={EXAMPLES.transformScale} title="Scale Effect" sticky>
+                                <ScrollTransform effect="scale" intensity={0.5}>
+                                    <div style={{ width: 150, height: 150, background: '#e17055', borderRadius: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>
+                                        ZOOM
+                                    </div>
+                                </ScrollTransform>
+                            </PreviewBlock>
+                        </div>
                     </div>
+
+                    <div className="example-grid">
+                        <div>
+                            <h3>Fade In</h3>
+                            <PreviewBlock code={EXAMPLES.transformFade} title="Fade Effect" sticky>
+                                <ScrollTransform effect="fade" intensity={1}>
+                                    <div style={{ padding: 20, background: '#00b894', borderRadius: 8, color: 'white', fontWeight: 'bold' }}>I FADE IN</div>
+                                </ScrollTransform>
+                            </PreviewBlock>
+                        </div>
+                        <div>
+                            <h3>Slide In</h3>
+                            <PreviewBlock code={EXAMPLES.transformSlide} title="Slide Effect" sticky>
+                                <ScrollTransform effect="slide-in" direction="left" intensity={50}>
+                                    <div style={{ padding: 20, background: '#e84393', borderRadius: 8, color: 'white', fontWeight: 'bold' }}>SLIDE IN</div>
+                                </ScrollTransform>
+                            </PreviewBlock>
+                        </div>
+                    </div>
+
+                    <div className="example-grid">
+                        <div>
+                            <h3>Flip (Rotate X)</h3>
+                            <PreviewBlock code={EXAMPLES.transformFlip} title="Flip Effect" sticky>
+                                <ScrollTransform effect="rotate-x" intensity={180}>
+                                    <div style={{ width: 150, height: 100, background: '#fdcb6e', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem' }}>
+                                        💳
+                                    </div>
+                                </ScrollTransform>
+                            </PreviewBlock>
+                        </div>
+                        <div>
+                            <h3>3D Spin (Rotate Y)</h3>
+                            <PreviewBlock code={EXAMPLES.transform3D} title="3D Effect" sticky>
+                                <ScrollTransform effect="rotate-y" intensity={360}>
+                                    <div style={{ width: 100, height: 100, background: '#636e72', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', color: 'white' }}>
+                                        🧊
+                                    </div>
+                                </ScrollTransform>
+                            </PreviewBlock>
+                        </div>
+                    </div>
+
+                    <h3>Advanced: Custom Transforms</h3>
+                    <p>For complete control, access the raw DOM element and scroll velocity.</p>
+                    <PreviewBlock code={EXAMPLES.transformCustom} title="Custom Math Animation" sticky>
+                        <ScrollTransform
+                            effect="custom"
+                            transform={(el, scrollY) => {
+                                const x = Math.sin(scrollY * 0.05) * 50;
+                                el.style.transform = `translateX(${x}px)`;
+                            }}
+                        >
+                            <div style={{ fontSize: '3rem' }}>🌊 🌊 🌊</div>
+                        </ScrollTransform>
+                    </PreviewBlock>
+
                 </section>
 
+                <hr className="docs-divider" />
+
+                {/* Component Showcase */}
+                <section id="showcase" className="docs-section">
+                    <h2>Component Showcase</h2>
+                    <p>Real-world examples of what you can build.</p>
+
+                    <h3>Parallax Hero</h3>
+                    <PreviewBlock code={EXAMPLES.transformParallax} title="Parallax Hero">
+                        <div style={{ height: '500px', overflow: 'hidden' }}>
+                            <ParallaxHero />
+                        </div>
+                    </PreviewBlock>
+
+                </section>
+
+                <hr className="docs-divider" />
+
+                <section id="math-effects" className="docs-section">
+                    <h2>Math Effects</h2>
+                    <p>Use custom logic for advanced animations.</p>
+                    <PreviewBlock code={EXAMPLES.transformCustom} title="Custom Math Animation" sticky>
+                        <ScrollTransform
+                            effect="custom"
+                            transform={(el, scrollY) => {
+                                const x = Math.sin(scrollY * 0.05) * 50;
+                                el.style.transform = `translateX(${x}px)`;
+                            }}
+                        >
+                            <div style={{ fontSize: '3rem' }}>🌊 🌊 🌊</div>
+                        </ScrollTransform>
+                    </PreviewBlock>
+                </section>
+
+                <hr className="docs-divider" />
+
+                {/* Component Showcase */}
+                <section id="showcase" className="docs-section">
+                    <h2>Component Showcase</h2>
+                    <p>Real-world examples of what you can build.</p>
+
+                    <h3>Parallax Hero</h3>
+                    <PreviewBlock code="<ParallaxHero />" title="Parallax Hero">
+                        <div style={{ height: '500px', overflow: 'hidden' }}>
+                            <ParallaxHero />
+                        </div>
+                    </PreviewBlock>
+
+                    <h3>Scrollytelling</h3>
+                    <PreviewBlock code="<ScrollytellingShowcase />" title="Scrollytelling">
+                        <ScrollytellingShowcase />
+                    </PreviewBlock>
+
+                    <h3>Cosmic Journey</h3>
+                    <PreviewBlock code="<CosmicJourney />" title="Cosmic Journey">
+                        <CosmicJourney />
+                    </PreviewBlock>
+
+                    <h3>Big Text Reveal</h3>
+                    <PreviewBlock code="<BigTextReveal />" title="Big Text Reveal">
+                        <BigTextReveal />
+                    </PreviewBlock>
+
+                    <h3>Velocity Skew</h3>
+                    <PreviewBlock code="<VelocitySkewSection />" title="Velocity Skew">
+                        <VelocitySkewSection />
+                    </PreviewBlock>
+
+                    <h3>Horizontal Gallery</h3>
+                    <PreviewBlock code="<HorizontalGallery />" title="Horizontal Gallery">
+                        <div style={{ height: '400px' }}>
+                            <HorizontalGallery />
+                        </div>
+                    </PreviewBlock>
+
+                    <h3>Grid Showcase</h3>
+                    <PreviewBlock code="<GridShowcase />" title="Grid Showcase">
+                        <GridShowcase />
+                    </PreviewBlock>
+
+                    <h3>Pinned Content</h3>
+                    <PreviewBlock code="<PinnedContent />" title="Pinned Content">
+                        <PinnedContent />
+                    </PreviewBlock>
+
+                    <h3>Fixed Background</h3>
+                    <PreviewBlock code="<FixedBackgroundStory />" title="Fixed Background">
+                        <FixedBackgroundStory />
+                    </PreviewBlock>
+
+                    <h3>Advanced 3D Transforms</h3>
+                    <PreviewBlock code="<AdvancedTransforms />" title="3D Cards">
+                        <AdvancedTransforms />
+                    </PreviewBlock>
+
+                    <h3>Color Shift</h3>
+                    <PreviewBlock code="<ColorShiftSection />" title="Color Shift">
+                        <ColorShiftSection />
+                    </PreviewBlock>
+                </section>
+
+                <hr className="docs-divider" />
+
+                {/* useScroll Hook */}
                 <section id="use-scroll" className="docs-section">
-                    <h2 className="docs-h2">useScroll Hook</h2>
-                    <p className="docs-p">
-                        A low-level hook for subscribing to scroll updates anywhere in your component tree.
-                    </p>
-
-                    <div className="docs-pre">
-                        <code className="docs-code">
-                            {`import { useScroll } from 'scroll-dynamics-pro';
-
-const MyComponent = () => {
-  const { subscribe, getScrollY } = useScroll();
-
-  useEffect(() => {
-    return subscribe((scrollY, velocity) => {
-      console.log('Current scroll:', scrollY);
-      console.log('Current velocity:', velocity);
-    });
-  }, [subscribe]);
-
-  return <div>Check console</div>;
-};`}
-                        </code>
-                    </div>
-
-                    <div className="docs-alert docs-alert-warning">
-                        <strong>Performance Warning:</strong> Avoid updating React state heavily inside the subscribe callback.
-                        Prefer direct DOM manipulation (refs) for 60fps animations.
-                    </div>
+                    <h2>useScroll Hook</h2>
+                    <p>Directly access scroll state in any component.</p>
+                    <CodeBlock code={EXAMPLES.hookSubscribe} language="tsx" title="Subscription Pattern" />
                 </section>
 
                 <section id="performance" className="docs-section">
-                    <h2 className="docs-h2">Performance Tips</h2>
-                    <p className="docs-p">
-                        1. <strong>Direct DOM Updates:</strong> The `custom` transform callback gives you the raw DOM element. Use this to set `style.transform` directly instead of triggering React re-renders.
-                        <br />
-                        2. <strong>will-change:</strong> For complex animations, add `will-change: transform` to your CSS to hint the browser compositor.
-                        <br />
-                        3. <strong>Image Optimization:</strong> Heavy images can cause jank. Ensure images are properly sized and optimized.
-                    </p>
+                    <h2>Performance</h2>
+                    <ul style={{ lineHeight: '1.8', color: '#ccc' }}>
+                        <li><strong>Single Listener:</strong> We only attach one scroll listener to the window.</li>
+                        <li><strong>rAF Loop:</strong> Updates are synced with the browser paint cycle.</li>
+                        <li><strong>CSS Transforms:</strong> All animations utilize hardware-accelerated CSS properties.</li>
+                    </ul>
                 </section>
 
-            </main>
-        </div>
+            </main >
+        </div >
     );
 };

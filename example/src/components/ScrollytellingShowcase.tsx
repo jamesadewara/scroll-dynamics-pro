@@ -68,7 +68,7 @@ export const ScrollytellingShowcase = () => {
                             <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle, transparent 20%, #000 100%)' }} />
 
                             {/* Text Layers */}
-                            <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', maxWidth: '800px' }}>
+                            <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', maxWidth: '800px', width: "100%" }}>
                                 <h3 style={{
                                     fontSize: 'clamp(2rem, 6vw, 4rem)',
                                     position: 'absolute',

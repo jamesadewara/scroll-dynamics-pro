@@ -32,7 +32,7 @@ export const BigTextReveal: React.FC = () => {
                         <ScrollTransform
                             effect="slide-in"
                             direction="up"
-                            intensity={1.5}
+                            intensity={0.5}
                             style={{ display: 'inline-block' }}
                         >
                             {word}

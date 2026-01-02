@@ -9,8 +9,9 @@ interface ScrollContextValue {
 
 const ScrollContext = createContext<ScrollContextValue | null>(null);
 
-export const ScrollProvider: React.FC<{ children: React.ReactNode }> = ({
+export const ScrollProvider: React.FC<{ children: React.ReactNode; containerRef?: React.RefObject<HTMLElement> }> = ({
     children,
+    containerRef,
 }) => {
     const listenersRef = useRef<Set<ScrollCallback>>(new Set());
     const scrollYRef = useRef<number>(0);
@@ -20,14 +21,24 @@ export const ScrollProvider: React.FC<{ children: React.ReactNode }> = ({
     const previousScrollYRef = useRef<number>(0);
 
     useEffect(() => {
+        const target = containerRef?.current || (typeof window !== "undefined" ? window : null);
+        if (!target) return;
+
+        const getScrollPosition = () => {
+            if (target instanceof Window) {
+                return target.scrollY;
+            }
+            return (target as HTMLElement).scrollTop;
+        };
+
         // Initial scroll position
-        if (typeof window !== "undefined") {
-            scrollYRef.current = window.scrollY;
-            previousScrollYRef.current = window.scrollY;
-        }
+        const initialScroll = getScrollPosition();
+        scrollYRef.current = initialScroll;
+        previousScrollYRef.current = initialScroll;
+
 
         const update = () => {
-            const currentScroll = window.scrollY;
+            const currentScroll = getScrollPosition();
             const velocity = currentScroll - previousScrollYRef.current;
 
             scrollYRef.current = currentScroll;
@@ -44,14 +55,18 @@ export const ScrollProvider: React.FC<{ children: React.ReactNode }> = ({
             }
         };
 
-        window.addEventListener("scroll", requestTick, { passive: true });
-        window.addEventListener("resize", requestTick, { passive: true });
+        target.addEventListener("scroll", requestTick, { passive: true });
+        if (target instanceof Window) {
+            target.addEventListener("resize", requestTick, { passive: true });
+        }
 
         return () => {
-            window.removeEventListener("scroll", requestTick);
-            window.removeEventListener("resize", requestTick);
+            target.removeEventListener("scroll", requestTick);
+            if (target instanceof Window) {
+                target.removeEventListener("resize", requestTick);
+            }
         };
-    }, []);
+    }, [containerRef]);
 
     const subscribe = (callback: ScrollCallback) => {
         listenersRef.current.add(callback);
