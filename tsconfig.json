@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "declaration": true,
     "declarationDir": "dist",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "skipLibCheck": true
   },
   "include": ["src/**/*"],

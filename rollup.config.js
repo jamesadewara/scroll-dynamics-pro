@@ -3,6 +3,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
+import babel from "@rollup/plugin-babel";
 import terser from "@rollup/plugin-terser";
 
 const packageJson = JSON.parse(readFileSync("./package.json"));
@@ -29,6 +30,11 @@ export default {
     commonjs(),
     typescript({
       tsconfig: "./tsconfig.json",
+    }),
+    babel({
+      babelHelpers: "bundled",
+      exclude: "node_modules/**",
+      extensions: [".js", ".jsx", ".ts", ".tsx"],
     }),
     terser(),
   ],
